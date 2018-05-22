@@ -16,11 +16,12 @@ public class ClientTimingFilter implements ClientRequestFilter, ClientResponseFi
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientTimingFilter.class);
 	private static final String TIMER_PROPERTY = ClientTimingFilter.class.getName() + ".timer";
+	public static final String TIMER_NAME = MetricRegistry.name(InstrumentedFeature.class, "client-request-timer");
 
 	private Timer requestTimer;
 
 	public ClientTimingFilter(MetricRegistry metricRegistry) {
-		this.requestTimer = metricRegistry.timer(MetricRegistry.name(InstrumentedFeature.class, "client-request-timer"));
+		this.requestTimer = metricRegistry.timer(TIMER_NAME);
 	}
 
 	@Override
